@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="tests.Trades" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-11T08:28:41" hostname="AUSAL1T7GTFJ" time="57.158">
+  <properties/>
+  <testcase name="trading" classname="tests.Trades" time="57.158"/>
+  <system-out><![CDATA[
+**************************************************
+* Initializing Trades...
+**************************************************
+Browser: firefox
+
+Executing preconditions for tests.Trades...
+
+
+	*** Starting test trading...
+
+]]></system-out>
+  <system-err><![CDATA[Jun 11, 2020 3:28:40 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+]]></system-err>
+</testsuite>
