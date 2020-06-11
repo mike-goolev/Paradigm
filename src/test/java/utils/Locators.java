@@ -28,6 +28,8 @@ public class Locators {
 
         public By expiryDropDown = By.xpath("/html/body/div[3]/div/div[1]/div/div/div[2]/div/div[4]/table/tbody/tr/td[4]/div/div/div/div[1]/div[1]");
         public By perpetualValue = By.xpath("/html/body/div[3]/div/div[1]/div/div/div[2]/div/div[4]/table/tbody/tr/td[4]/div/div/div[2]/div/div[1]");
+        public By junValue = By.xpath("/html/body/div[3]/div/div[1]/div/div/div[2]/div/div[4]/table/tbody/tr/td[4]/div/div/div[2]/div/div[2]");
+        public By sepValue = By.xpath("/html/body/div[3]/div/div[1]/div/div/div[2]/div/div[4]/table/tbody/tr/td[4]/div/div/div[2]/div/div[3]");
 
         public By quantity = By.xpath("//body//tbody//td[9]");
         public By value = By.xpath("/html/body/div[3]/div/div[1]/div/div/div[2]/div/div[4]/table/tbody/tr/td[9]/input");
@@ -48,5 +50,3 @@ public class Locators {
         public By sellConfirmBtn = By.xpath("(//button[text()='Sell'])[2]");
     }
 }
-
-

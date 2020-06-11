@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 import pages.*;
 import utils.Screenshot;
 
+import java.util.Set;
+
 public class Trades extends BaseTest {
     private HomePage homePage;
     private MainPage mainPage;
@@ -27,95 +29,113 @@ public class Trades extends BaseTest {
 
     @Test
     public void trading() {
+        /* Start test on home page */
+        homePage.loadHomePageByURL();
 
-        /* run test twice using for loop */
-        for(int i=0; i<2; i++) {
-            if (i == 0) {
+        /* run test case 3 times */
+        for(int j=0; j<3; j++) {
 
-                /* Start test on home page */
-                homePage.loadHomePageByURL();
+            /* run steps 1-12 */
+            for(int i=0; i<2; i++) {
+                if (i == 0 && j == 0) {
+                    /* Login User A */
+                    homePage.enterEmail("paradigmtrading7@qa.team");
+                    homePage.enterPassword("Testio1234");
+                    homePage.clickSignBtn();
+                }
 
-                /* Login User A */
-                homePage.enterEmail("paradigmtrading7@qa.team");
-                homePage.enterPassword("Testio1234");
-                homePage.clickSignBtn();
-            }
+                /* Click Trade section and load trade channel with User B */
+                mainPage.clickTradeBtn();
+                mainPage.clickTradeChannelBtn();
 
-            /* Click Trade section and load trade channel with User B */
-            mainPage.clickTradeBtn();
-            mainPage.clickTradeChannelBtn();
+                /* Click RFQ, CF button and Future buttons */
+                mainPage.clickRFQBtn();
+                mainPage.clickCFBtn();
+                mainPage.clickFutureBtn();
 
-            /* Click RFQ, CF button and Future buttons */
-            mainPage.clickRFQBtn();
-            mainPage.clickCFBtn();
-            mainPage.clickFutureBtn();
+                /* Select account */
+                mainPage.clickAccountDropDown();
+                mainPage.selectValue();
 
-            /* Select account */
-            mainPage.clickAccountDropDown();
-            mainPage.selectValue();
+                /* Select Perpetual from ‘Expiry’ dropdown */
+                if (j == 0) {
+                    mainPage.clickExpiryDropDown();
+                    mainPage.selectPerpetualValue();
+                }
 
-            /* Select Perpetual from ‘Expiry’ dropdown */
-            mainPage.clickExpiryDropDown();
-            mainPage.selectPerpetualValue();
+                if (j == 1) {
+                    mainPage.clickExpiryDropDown();
+                    mainPage.clickJuneDropDown();
 
-            /* Enter Quantity amount */
-            mainPage.enterQuantity();
+                }
 
-            /* Click ‘Send RFQ’ */
-            mainPage.clickSendRFQBtn();
+                if (j == 2) {
+                    mainPage.clickExpiryDropDown();
+                    mainPage.clickSeptemberDropDown();
+                }
 
-            /* Store the current window handle */
-            String winHandleBefore = driver.getWindowHandle();
+                /* Enter Quantity amount */
+                mainPage.enterQuantity();
 
-            /* Open new window tab */
-            if (i == 0) {
-                String url_second = "https://fe.stage.paradigm.co/";
-                ((JavascriptExecutor) driver).executeScript("window.open(arguments[0])", url_second);
-            }
+                /* Click ‘Send RFQ’ */
+                mainPage.clickSendRFQBtn();
 
-            // Switch to new window opened
-            for(String winHandle : driver.getWindowHandles()){
-                driver.switchTo().window(winHandle);
-            }
+                /* Store the current window handle */
+                String winHandleBefore = driver.getWindowHandle();
 
-            if (i == 0) {
-                /* Login User B */
-                homePage.enterEmail("paradigmtrading32@qa.team");
-                homePage.enterPassword("Testio1234");
-                homePage.clickSignBtn();
-            }
+                Set<String> allWindowHandles = driver.getWindowHandles();
 
-            /* Click Trade section and load trade channel with User A */
-            mainPage.clickTradeBtn();
-            mainPage.clickTradeChannelBtn();
+                /* Open new window tab */
+                if (i == 0) {
+                    String url_second = "https://fe.stage.paradigm.co/";
+                    ((JavascriptExecutor) driver).executeScript("window.open();", url_second);
+                }
 
-            /* Click Quote button */
-            mainPage.clickQuoteBtn();
+                // Switch to new window opened
+                for(String winHandle : driver.getWindowHandles()){
+                    driver.switchTo().window(winHandle);
+                }
 
-            /* Select sub account */
-            mainPage.clickAccountDropDownOnDetails();
-            mainPage.selectsubValue();
+                if (i == 0 && j == 0) {
+                    /* Login User B */
+                    homePage.loadHomePageByURL();
+                    homePage.enterEmail("paradigmtrading32@qa.team");
+                    homePage.enterPassword("Testio1234");
+                    homePage.clickSignBtn();
+                }
 
-            /* Enter price, copy value from Mark price */
-            mainPage.enterPrice();
+                /* Click Trade section and load trade channel with User A */
+                mainPage.clickTradeBtn();
+                mainPage.clickTradeChannelBtn();
 
-            /* Submit Quote */
-            mainPage.clickSubmitQuoteBtn();
+                /* Click Quote button */
+                mainPage.clickQuoteBtn();
 
-            if (i == 0) {
-                /* Switch to old window opened */
-                driver.switchTo().window(winHandleBefore);
+                /* Select sub account */
+                mainPage.clickAccountDropDownOnDetails();
+                mainPage.selectsubValue();
 
-                /* Click Buy button, Click Buy again in confirm dialog */
-                mainPage.clickBuyBtn();
-                mainPage.clickBuyConfirmBtn();
-            }
+                /* Enter price, copy value from Mark price */
+                mainPage.enterPrice();
 
-            /* Click Sell button and confirm */
-            if (i == 1) {
-                driver.switchTo().window(winHandleBefore);
-                mainPage.clickSellBtn();
-                mainPage.lickSellConfirmBtn();
+                /* Submit Quote */
+                mainPage.clickSubmitQuoteBtn();
+
+                if (i == 0) {
+                    /* Switch to old window opened */
+                    driver.switchTo().window(winHandleBefore);
+
+                    /* Click Buy button, Click Buy again in confirm dialog */
+                    mainPage.clickBuyBtn();
+                    mainPage.clickBuyConfirmBtn();
+                }
+
+                /* Click Sell button and confirm */
+                if (i == 1) {
+                    driver.switchTo().window(winHandleBefore);
+                    mainPage.clickSellBtn();
+                    mainPage.lickSellConfirmBtn();
+                }
             }
         }
     }

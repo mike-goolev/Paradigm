@@ -103,4 +103,12 @@ public class MainPage extends BasePage {
     public void lickSellConfirmBtn() {
         click(mainPageLocators.sellConfirmBtn);
     }
+
+    public void clickJuneDropDown() {
+        click(mainPageLocators.junValue);
+    }
+
+    public void clickSeptemberDropDown() {
+        click(mainPageLocators.sepValue);
+    }
 }
